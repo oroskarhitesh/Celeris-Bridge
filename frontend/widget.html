@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Widget — development page</title>
+    <style>
+      /*
+       * Deliberately opinionated, and deliberately hostile.
+       *
+       * This page exists to stand in for a customer's website, so it sets the
+       * things a customer's stylesheet sets and that a badly built widget
+       * would inherit: a tiny root font size, a serif family, a global box
+       * model, list styling. If the widget looks right here, the shadow root
+       * is doing its job.
+       */
+      html { font-size: 62.5%; }
+      body {
+        margin: 0;
+        padding: 48px;
+        font: 1.6rem/1.6 Georgia, "Times New Roman", serif;
+        color: #2b2b2b;
+        background: #fffdf7;
+      }
+      * { box-sizing: content-box; }
+      h1 { font-size: 3.2rem; margin: 0 0 8px; }
+      p { max-width: 60ch; }
+      li { list-style: square; }
+      code { background: #f1ede3; padding: 1px 4px; }
+    </style>
+  </head>
+  <body>
+    <h1>Somebody else's website</h1>
+    <p>
+      The chat widget is loaded below the way a customer loads it. Pass the ids on the
+      query string: <code>?workspace=ws_dev&amp;instance=agent_1&amp;api=http://127.0.0.1:8000</code>
+    </p>
+    <ul>
+      <li>This page's serif font and 62.5% root size must not reach the widget.</li>
+      <li>The widget's styles must not reach this list, this heading or this code tag.</li>
+    </ul>
+
+    <!--
+      In production this is one tag on a customer's page, with the ids as data
+      attributes and no query string:
+
+        <script src="https://cdn.example/widget.js"
+                data-workspace="ws_live" data-instance="agent_7" defer></script>
+    -->
+    <script type="module" src="/src/widget/index.tsx"></script>
+  </body>
+</html>

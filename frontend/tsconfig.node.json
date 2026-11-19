@@ -1,0 +1,16 @@
+{
+  "//": "The build config only. Separate so Node's globals -- process, Buffer -- are not in scope in src/, where using one would be a bug that typechecks.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "types": ["node"]
+  },
+  "include": ["vite.config.ts", "vite.widget.config.ts", "vitest.config.ts"]
+}

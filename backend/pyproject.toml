@@ -1,0 +1,46 @@
+[project]
+name = "celeris-bridge"
+version = "0.1.0"
+description = "Celeris Bridge backend"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "pydantic-settings",
+    # PyMongo's own async client (AsyncMongoClient), not motor: motor is
+    # deprecated and this is the supported path.
+    "pymongo",
+    "httpx",
+    # zoneinfo reads the IANA time zone database from the operating system and
+    # Windows does not ship one. Without this, every workspace is shown times
+    # in UTC on Windows and correctly on Linux -- the worst kind of difference
+    # between a developer machine and CI.
+    "tzdata",
+    # Reading PDFs. Pure Python with no system libraries, which is the
+    # whole reason for it over anything wrapping poppler: whether a
+    # customer can upload a PDF must not depend on the host image.
+    "pypdf",
+    # Multipart form parsing, which is how a document is uploaded. FastAPI
+    # needs it present to declare a file field at all, so it is a hard
+    # dependency rather than an extra.
+    "python-multipart",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+# The store contract suite runs against a real Mongo when one answers at
+# CB_TEST_MONGO_URL (default mongodb://127.0.0.1:27017) and skips otherwise:
+#   docker run -d --rm --name celeris-test-mongo -p 27017:27017 mongo:7
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/celeris_bridge"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

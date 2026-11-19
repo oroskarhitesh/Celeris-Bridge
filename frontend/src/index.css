@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/*
+ * The palette, named once.
+ *
+ * Tailwind 4 reads these as theme tokens, so `bg-surface` or `text-ink-soft`
+ * work like any built-in utility and a change here moves the whole interface
+ * rather than finding forty literal hex codes.
+ */
+@theme {
+  --color-canvas: oklch(98.4% 0.003 265);
+  --color-surface: oklch(100% 0 0);
+  --color-line: oklch(92.5% 0.005 265);
+  --color-ink: oklch(23% 0.015 265);
+  --color-ink-soft: oklch(52% 0.012 265);
+  --color-brand: oklch(55% 0.17 265);
+  --color-brand-soft: oklch(96% 0.02 265);
+  --color-good: oklch(62% 0.15 150);
+  --color-warn: oklch(72% 0.15 75);
+  --color-bad: oklch(58% 0.19 25);
+}
+
+html,
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+}
